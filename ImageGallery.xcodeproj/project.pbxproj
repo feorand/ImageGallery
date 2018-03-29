@@ -13,6 +13,7 @@
 		7ABEA0E5206CA194009BD95C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7ABEA0E4206CA194009BD95C /* Assets.xcassets */; };
 		7ABEA0E8206CA194009BD95C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7ABEA0E6206CA194009BD95C /* LaunchScreen.storyboard */; };
 		7ABEA0F1206CA318009BD95C /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABEA0F0206CA318009BD95C /* Utilities.swift */; };
+		7ABEA0F3206CB0B9009BD95C /* Gallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABEA0F2206CB0B9009BD95C /* Gallery.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		7ABEA0E7206CA194009BD95C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7ABEA0E9206CA194009BD95C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7ABEA0F0206CA318009BD95C /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		7ABEA0F2206CB0B9009BD95C /* Gallery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gallery.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,8 +60,9 @@
 			children = (
 				7ABEA0E1206CA194009BD95C /* Main.storyboard */,
 				7ABEA0DF206CA194009BD95C /* GalleryViewController.swift */,
-				7ABEA0E9206CA194009BD95C /* Info.plist */,
+				7ABEA0F2206CB0B9009BD95C /* Gallery.swift */,
 				7ABEA0F0206CA318009BD95C /* Utilities.swift */,
+				7ABEA0E9206CA194009BD95C /* Info.plist */,
 				7ABEA0EF206CA1D0009BD95C /* Supporting Files */,
 			);
 			path = ImageGallery;
@@ -147,6 +150,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7ABEA0F3206CB0B9009BD95C /* Gallery.swift in Sources */,
 				7ABEA0F1206CA318009BD95C /* Utilities.swift in Sources */,
 				7ABEA0E0206CA194009BD95C /* GalleryViewController.swift in Sources */,
 				7ABEA0DE206CA194009BD95C /* AppDelegate.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  Gallery.swift
 //  ImageGallery
 //
 //  Created by Pavel Prokofyev on 29.03.2018.
@@ -8,7 +8,6 @@
 
 import UIKit
 
-class GalleryViewController: UICollectionViewController {
-    
+class Gallery {
+    var images: [UIImage] = []
 }
-
