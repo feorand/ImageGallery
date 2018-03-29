@@ -39,6 +39,10 @@ extension GalleryViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 20
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 20
+    }
 }
 
 extension GalleryViewController: UICollectionViewDropDelegate
@@ -60,18 +64,24 @@ extension GalleryViewController: UICollectionViewDropDelegate
             let context = coordinator.drop(item, to: placeholder)
             
             let _ = item.itemProvider.loadObject(ofClass: URL.self) { url, error in
-                DispatchQueue.global(qos: .userInitiated).async {
-                    if let url = url, let data = try? Data(contentsOf: url.imageURL), let image = UIImage(data: data) {
-                        DispatchQueue.main.async {
-                            context.commitInsertion() { [weak self] _ in
-                                self?.gallery.images.insert(image, at: 0)
-                            }
-                        }
-                    } else {
-                        DispatchQueue.main.async {
-                            context.deletePlaceholder()
-                        }
+                if let url = url {
+                    self.getActualImageFor(placeholderContext: context, url: url)
+                }
+            }
+        }
+    }
+    
+    func getActualImageFor(placeholderContext: UICollectionViewDropPlaceholderContext, url: URL) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            if let data = try? Data(contentsOf: url.imageURL), let image = UIImage(data: data) {
+                DispatchQueue.main.async {
+                    placeholderContext.commitInsertion() { [weak self] _ in
+                        self?.gallery.images.insert(image, at: 0)
                     }
+                }
+            } else {
+                DispatchQueue.main.async {
+                    placeholderContext.deletePlaceholder()
                 }
             }
         }
