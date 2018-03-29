@@ -12,12 +12,21 @@ class GalleryViewController: UICollectionViewController
 {
     var gallery = Gallery()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        collectionView?.dropDelegate = self
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return gallery.images.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath)
+        if let cell = cell as? ImageCollectionViewCell {
+            cell.imageView.image = gallery.images[indexPath.item]
+        }
         return cell
     }
 }
