@@ -10,6 +10,7 @@ import UIKit
 
 struct ImageCollectionParameters {
     static let Width = 200
+    static let InterImageSpace = 20
 }
 
 class GalleryViewController: UICollectionViewController
@@ -19,6 +20,7 @@ class GalleryViewController: UICollectionViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        collectionView?.dragDelegate = self
         collectionView?.dropDelegate = self
     }
     
@@ -43,19 +45,35 @@ extension GalleryViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 20
+        return CGFloat(ImageCollectionParameters.InterImageSpace)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 20
+        return CGFloat(ImageCollectionParameters.InterImageSpace)
+    }
+}
+
+extension GalleryViewController: UICollectionViewDragDelegate {
+    func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        let image = gallery.images[indexPath.item]
+        let itemProvider = NSItemProvider(object: image)
+        let dragItem = UIDragItem(itemProvider: itemProvider)
+        dragItem.localObject = image
+        session.localContext = collectionView
+        return [dragItem]
     }
 }
 
 extension GalleryViewController: UICollectionViewDropDelegate
 {
     func collectionView(_ collectionView: UICollectionView, canHandle session: UIDropSession) -> Bool {
-        return session.canLoadObjects(ofClass: URL.self) &&
+        let isLocal = session.localDragSession?.localContext as? UICollectionView == collectionView
+        if isLocal {
+            return session.canLoadObjects(ofClass: UIImage.self)
+        } else {
+            return session.canLoadObjects(ofClass: URL.self) &&
             session.canLoadObjects(ofClass: UIImage.self)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
@@ -64,22 +82,36 @@ extension GalleryViewController: UICollectionViewDropDelegate
     }
     
     func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
-        for item in coordinator.session.items {
-            let indexPath = coordinator.destinationIndexPath ?? IndexPath(item: 0, section: 0)
-            let placeholder = UICollectionViewDropPlaceholder(insertionIndexPath: indexPath, reuseIdentifier: "PlaceholderCell")
-            let context = coordinator.drop(item, to: placeholder)
-            
-            var aspectRatio: CGFloat = 1.0
-            
-            let _ = item.itemProvider.loadObject(ofClass: UIImage.self) { imageObject, error in
-                if let image = imageObject as? UIImage {
-                    aspectRatio = image.size.height / image.size.width
+        let destinationIndexPath = coordinator.destinationIndexPath ?? IndexPath(item: 0, section: 0)
+
+        for item in coordinator.items {
+            if let sourcePath = item.sourceIndexPath {
+                let image = gallery.images[sourcePath.item]
+                let ratio = gallery.aspectRatios[sourcePath.item]
+                collectionView.performBatchUpdates({
+                    gallery.images.remove(at: sourcePath.item)
+                    gallery.aspectRatios.remove(at: sourcePath.item)
+                    gallery.images.insert(image, at: destinationIndexPath.item)
+                    gallery.aspectRatios.insert(ratio, at: destinationIndexPath.item)
+                    collectionView.deleteItems(at: [sourcePath])
+                    collectionView.insertItems(at: [destinationIndexPath])
+                })
+            } else {
+                let placeholder = UICollectionViewDropPlaceholder(insertionIndexPath: destinationIndexPath, reuseIdentifier: "PlaceholderCell")
+                let context = coordinator.drop(item.dragItem, to: placeholder)
+                
+                var aspectRatio: CGFloat = 1.0
+                
+                let _ = item.dragItem.itemProvider.loadObject(ofClass: UIImage.self) { imageObject, error in
+                    if let image = imageObject as? UIImage {
+                        aspectRatio = image.size.height / image.size.width
+                    }
                 }
-            }
-            
-            let _ = item.itemProvider.loadObject(ofClass: URL.self) { urlObject, error in
-                if let url = urlObject {
-                    self.getActualImageFor(placeholderContext: context, url: url, ratio: aspectRatio)
+                
+                let _ = item.dragItem.itemProvider.loadObject(ofClass: URL.self) { urlObject, error in
+                    if let url = urlObject {
+                        self.getActualImageFor(placeholderContext: context, url: url, ratio: aspectRatio)
+                    }
                 }
             }
         }
