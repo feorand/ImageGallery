@@ -31,6 +31,16 @@ class GalleryViewController: UICollectionViewController
     }
 }
 
+extension GalleryViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 180, height: 120)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 20
+    }
+}
+
 extension GalleryViewController: UICollectionViewDropDelegate
 {
     func collectionView(_ collectionView: UICollectionView, canHandle session: UIDropSession) -> Bool {
@@ -50,18 +60,19 @@ extension GalleryViewController: UICollectionViewDropDelegate
             let context = coordinator.drop(item, to: placeholder)
             
             let _ = item.itemProvider.loadObject(ofClass: URL.self) { url, error in
-            //item.itemProvider.loadItem(forTypeIdentifier: "URL", options: nil) { url, error in
-                let session = URLSession(configuration: .default)
-                let task = session.dataTask(with: url!.imageURL) { data, response, error in
-                    if let data = data, let image = UIImage(data: data) {
-                        context.commitInsertion() { [weak self] _ in
-                            self?.gallery.images += [image]
+                DispatchQueue.global(qos: .userInitiated).async {
+                    if let url = url, let data = try? Data(contentsOf: url.imageURL), let image = UIImage(data: data) {
+                        DispatchQueue.main.async {
+                            context.commitInsertion() { [weak self] _ in
+                                self?.gallery.images.insert(image, at: 0)
+                            }
                         }
                     } else {
-                        context.deletePlaceholder()
+                        DispatchQueue.main.async {
+                            context.deletePlaceholder()
+                        }
                     }
                 }
-                task.resume()
             }
         }
     }
