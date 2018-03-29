@@ -9,13 +9,13 @@
 import UIKit
 
 struct ImageCollectionParameters {
-    static let Width = 200
     static let InterImageSpace = 20
 }
 
 class GalleryViewController: UICollectionViewController
 {
     var gallery = Gallery()
+    var width = 200
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +39,6 @@ class GalleryViewController: UICollectionViewController
 
 extension GalleryViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = ImageCollectionParameters.Width
         let height = Int(CGFloat(width) * gallery.aspectRatios[indexPath.item])
         return CGSize(width: width, height:height)
     }
