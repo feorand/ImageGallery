@@ -53,25 +53,15 @@
                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Txa-sy-bea">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                        </imageView>
                                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="FVk-xO-Wc2">
                                             <rect key="frame" x="15" y="15" width="20" height="20"/>
                                         </activityIndicatorView>
                                     </subviews>
                                 </view>
                                 <constraints>
-                                    <constraint firstItem="Txa-sy-bea" firstAttribute="leading" secondItem="DiO-E8-xtn" secondAttribute="leading" id="6Sc-eg-IT1"/>
-                                    <constraint firstAttribute="trailing" secondItem="Txa-sy-bea" secondAttribute="trailing" id="HZO-eR-HvR"/>
-                                    <constraint firstAttribute="bottom" secondItem="Txa-sy-bea" secondAttribute="bottom" id="msi-m0-cbI"/>
-                                    <constraint firstItem="Txa-sy-bea" firstAttribute="top" secondItem="DiO-E8-xtn" secondAttribute="top" id="sNb-gG-VLw"/>
                                     <constraint firstItem="FVk-xO-Wc2" firstAttribute="centerX" secondItem="DiO-E8-xtn" secondAttribute="centerX" id="sdY-xo-xI3"/>
                                     <constraint firstItem="FVk-xO-Wc2" firstAttribute="centerY" secondItem="DiO-E8-xtn" secondAttribute="centerY" id="vxG-fP-rH5"/>
                                 </constraints>
-                                <connections>
-                                    <outlet property="imageView" destination="Txa-sy-bea" id="F9a-kY-GRK"/>
-                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
