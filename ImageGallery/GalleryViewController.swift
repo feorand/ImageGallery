@@ -10,7 +10,16 @@ import UIKit
 
 class GalleryViewController: UICollectionViewController
 {
+    var gallery = Gallery()
     
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return gallery.images.count
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath)
+        return cell
+    }
 }
 
 extension GalleryViewController: UICollectionViewDropDelegate
