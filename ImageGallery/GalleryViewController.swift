@@ -33,7 +33,11 @@ class GalleryViewController: UICollectionViewController
 
 extension GalleryViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 180, height: 120)
+        let image = gallery.images[indexPath.item]
+        let width = 200
+        let aspectRatio = CGFloat(width) / image.size.width
+        let height = Int(aspectRatio * image.size.height)
+        return CGSize(width: width, height: height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
@@ -71,7 +75,7 @@ extension GalleryViewController: UICollectionViewDropDelegate
         }
     }
     
-    func getActualImageFor(placeholderContext: UICollectionViewDropPlaceholderContext, url: URL) {
+    private func getActualImageFor(placeholderContext: UICollectionViewDropPlaceholderContext, url: URL) {
         DispatchQueue.global(qos: .userInitiated).async {
             if let data = try? Data(contentsOf: url.imageURL), let image = UIImage(data: data) {
                 DispatchQueue.main.async {
