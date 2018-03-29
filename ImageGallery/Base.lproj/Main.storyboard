@@ -24,13 +24,27 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImageCell" id="uOM-Uc-51j">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImageCell" id="uOM-Uc-51j" customClass="ImageCollectionViewCell" customModule="ImageGallery" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jGO-hH-FKK">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        </imageView>
+                                    </subviews>
                                 </view>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="jGO-hH-FKK" secondAttribute="trailing" id="Vbw-WT-4WL"/>
+                                    <constraint firstAttribute="bottom" secondItem="jGO-hH-FKK" secondAttribute="bottom" id="bO9-bA-IZi"/>
+                                    <constraint firstItem="jGO-hH-FKK" firstAttribute="leading" secondItem="uOM-Uc-51j" secondAttribute="leading" id="gI1-ap-L5j"/>
+                                    <constraint firstItem="jGO-hH-FKK" firstAttribute="top" secondItem="uOM-Uc-51j" secondAttribute="top" id="wNv-ex-WL6"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="imageView" destination="jGO-hH-FKK" id="5C8-ob-9f8"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
