@@ -9,11 +9,20 @@
 import UIKit
 
 class Gallery {
-    var images: [UIImage] = []
-    var aspectRatios: [CGFloat] = []
+    private(set) var images: [UIImage] = []
+    private(set) var aspectRatios: [CGFloat] = []
     
     func insert(image: UIImage, withRatio ratio: CGFloat) {
         images.insert(image, at: 0)
         aspectRatios.insert(ratio, at: 0)
-    }    
+    }
+    
+    func swap(index1: Int, index2: Int) {
+        let image = images[index1]
+        let ratio = aspectRatios[index1]
+        images.remove(at: index1)
+        aspectRatios.remove(at: index1)
+        images.insert(image, at: index2)
+        aspectRatios.insert(ratio, at: index2)
+    }
 }

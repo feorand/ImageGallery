@@ -86,13 +86,8 @@ extension GalleryViewController: UICollectionViewDropDelegate
 
         for item in coordinator.items {
             if let sourcePath = item.sourceIndexPath {
-                let image = gallery.images[sourcePath.item]
-                let ratio = gallery.aspectRatios[sourcePath.item]
                 collectionView.performBatchUpdates({
-                    gallery.images.remove(at: sourcePath.item)
-                    gallery.aspectRatios.remove(at: sourcePath.item)
-                    gallery.images.insert(image, at: destinationIndexPath.item)
-                    gallery.aspectRatios.insert(ratio, at: destinationIndexPath.item)
+                    gallery.swap(index1: sourcePath.item, index2: destinationIndexPath.item)
                     collectionView.deleteItems(at: [sourcePath])
                     collectionView.insertItems(at: [destinationIndexPath])
                 })
