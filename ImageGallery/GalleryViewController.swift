@@ -31,6 +31,7 @@ class GalleryViewController: UICollectionViewController
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath)
         if let cell = cell as? ImageCollectionViewCell {
+            cell.imageView.image = nil
             DispatchQueue.global(qos: .userInitiated).async {
                 if let data = try? Data(contentsOf: self.gallery.imageDatas[indexPath.item].url), let image = UIImage(data: data) {
                     DispatchQueue.main.async {
@@ -61,10 +62,10 @@ extension GalleryViewController: UICollectionViewDelegateFlowLayout {
 
 extension GalleryViewController: UICollectionViewDragDelegate {
     func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        let image = UIImage() //gallery.images[indexPath.item]
-        let itemProvider = NSItemProvider(object: image)
+        let object = String(indexPath.item) as NSString
+        let itemProvider = NSItemProvider(object: object)
         let dragItem = UIDragItem(itemProvider: itemProvider)
-        dragItem.localObject = image
+        dragItem.localObject = object
         session.localContext = collectionView
         return [dragItem]
     }
@@ -73,9 +74,8 @@ extension GalleryViewController: UICollectionViewDragDelegate {
 extension GalleryViewController: UICollectionViewDropDelegate
 {
     func collectionView(_ collectionView: UICollectionView, canHandle session: UIDropSession) -> Bool {
-        let isLocal = session.localDragSession?.localContext as? UICollectionView == collectionView
-        if isLocal {
-            return session.canLoadObjects(ofClass: UIImage.self)
+        if isLocal(session) {
+            return session.canLoadObjects(ofClass: NSString.self)
         } else {
             return session.canLoadObjects(ofClass: URL.self) &&
             session.canLoadObjects(ofClass: UIImage.self)
@@ -83,8 +83,7 @@ extension GalleryViewController: UICollectionViewDropDelegate
     }
     
     func collectionView(_ collectionView: UICollectionView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UICollectionViewDropProposal {
-        let isLocal = session.localDragSession?.localContext as? UICollectionView == collectionView
-        return UICollectionViewDropProposal(operation: isLocal ? .move : .copy, intent: .insertAtDestinationIndexPath)
+        return UICollectionViewDropProposal(operation: isLocal(session) ? .move : .copy, intent: .insertAtDestinationIndexPath)
     }
     
     func collectionView(_ collectionView: UICollectionView, performDropWith coordinator: UICollectionViewDropCoordinator) {
@@ -129,5 +128,9 @@ extension GalleryViewController: UICollectionViewDropDelegate
         DispatchQueue.main.async {
             self.collectionView?.insertItems(at: [indexPath])
         }
+    }
+    
+    private func isLocal(_ session: UIDropSession) -> Bool {
+        return session.localDragSession?.localContext as? UICollectionView == collectionView
     }
 }
