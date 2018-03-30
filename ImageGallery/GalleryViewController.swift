@@ -17,6 +17,10 @@ class GalleryViewController: UICollectionViewController
     var gallery = Gallery()
     var width = ImageGalleryParameters.ImageWidth
     
+    var flowLayout: UICollectionViewFlowLayout? {
+        return collectionView?.collectionViewLayout as? UICollectionViewFlowLayout
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,7 +53,7 @@ class GalleryViewController: UICollectionViewController
     
     @IBAction func pinchGestureRecognized(_ sender: UIPinchGestureRecognizer) {
         width = Int(CGFloat(ImageGalleryParameters.ImageWidth) * sender.scale)
-        collectionView?.reloadData()
+        flowLayout?.invalidateLayout()
     }
 }
 
