@@ -15,6 +15,7 @@
 		7ABEA0F1206CA318009BD95C /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABEA0F0206CA318009BD95C /* Utilities.swift */; };
 		7ABEA0F3206CB0B9009BD95C /* Gallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABEA0F2206CB0B9009BD95C /* Gallery.swift */; };
 		7ABEA0F5206CB590009BD95C /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABEA0F4206CB590009BD95C /* ImageCollectionViewCell.swift */; };
+		7ABEA0F7206E1877009BD95C /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABEA0F6206E1877009BD95C /* Array+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		7ABEA0F0206CA318009BD95C /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		7ABEA0F2206CB0B9009BD95C /* Gallery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gallery.swift; sourceTree = "<group>"; };
 		7ABEA0F4206CB590009BD95C /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		7ABEA0F6206E1877009BD95C /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 				7ABEA0F4206CB590009BD95C /* ImageCollectionViewCell.swift */,
 				7ABEA0F2206CB0B9009BD95C /* Gallery.swift */,
 				7ABEA0F0206CA318009BD95C /* Utilities.swift */,
+				7ABEA0F6206E1877009BD95C /* Array+Extension.swift */,
 				7ABEA0E9206CA194009BD95C /* Info.plist */,
 				7ABEA0EF206CA1D0009BD95C /* Supporting Files */,
 			);
@@ -156,6 +159,7 @@
 				7ABEA0F3206CB0B9009BD95C /* Gallery.swift in Sources */,
 				7ABEA0F5206CB590009BD95C /* ImageCollectionViewCell.swift in Sources */,
 				7ABEA0F1206CA318009BD95C /* Utilities.swift in Sources */,
+				7ABEA0F7206E1877009BD95C /* Array+Extension.swift in Sources */,
 				7ABEA0E0206CA194009BD95C /* GalleryViewController.swift in Sources */,
 				7ABEA0DE206CA194009BD95C /* AppDelegate.swift in Sources */,
 			);

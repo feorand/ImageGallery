@@ -31,7 +31,17 @@ class GalleryViewController: UICollectionViewController
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath)
         if let cell = cell as? ImageCollectionViewCell {
-            //cell.imageView.image =
+            DispatchQueue.global(qos: .userInitiated).async {
+                if let data = try? Data(contentsOf: self.gallery.imageDatas[indexPath.item].url), let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        cell.imageView.image = image
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        cell.imageView.image = UIImage(contentsOfFile: "no_image")
+                    }
+                }
+            }
         }
         return cell
     }
@@ -51,7 +61,7 @@ extension GalleryViewController: UICollectionViewDelegateFlowLayout {
 
 extension GalleryViewController: UICollectionViewDragDelegate {
     func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        let image = gallery.images[indexPath.item]
+        let image = UIImage() //gallery.images[indexPath.item]
         let itemProvider = NSItemProvider(object: image)
         let dragItem = UIDragItem(itemProvider: itemProvider)
         dragItem.localObject = image
@@ -83,14 +93,11 @@ extension GalleryViewController: UICollectionViewDropDelegate
         for item in coordinator.items {
             if let sourcePath = item.sourceIndexPath {
                 collectionView.performBatchUpdates({
-                    gallery.swap(index1: sourcePath.item, index2: destinationIndexPath.item)
+                    gallery.imageDatas.move(from: sourcePath.item, to: destinationIndexPath.item)
                     collectionView.deleteItems(at: [sourcePath])
                     collectionView.insertItems(at: [destinationIndexPath])
                 })
-            } else {
-                let placeholder = UICollectionViewDropPlaceholder(insertionIndexPath: destinationIndexPath, reuseIdentifier: "PlaceholderCell")
-                let context = coordinator.drop(item.dragItem, to: placeholder)
-                
+            } else {                
                 var obtainedURL: URL?
                 var obtainedRatio: CGFloat?
                 
@@ -106,7 +113,6 @@ extension GalleryViewController: UICollectionViewDropDelegate
                 
                 let _ = item.dragItem.itemProvider.loadObject(ofClass: URL.self) { urlObject, error in
                     if let url = urlObject {
-                        //self.getActualImageFor(placeholderContext: context, url: url, ratio: aspectRatio)
                         obtainedURL = url
                         if let ratio = obtainedRatio {
                             self.insertImageData(url: url, ratio: ratio, indexPath: destinationIndexPath)
@@ -122,22 +128,6 @@ extension GalleryViewController: UICollectionViewDropDelegate
         
         DispatchQueue.main.async {
             self.collectionView?.insertItems(at: [indexPath])
-        }
-    }
-    
-    private func getActualImageFor(placeholderContext: UICollectionViewDropPlaceholderContext, url: URL, ratio: CGFloat) {
-        DispatchQueue.global(qos: .userInitiated).async {
-            if let data = try? Data(contentsOf: url.imageURL), let image = UIImage(data: data) {
-                DispatchQueue.main.async {
-                    placeholderContext.commitInsertion() { [weak self] _ in
-                        self?.gallery.insert(image: image, withRatio: ratio)
-                    }
-                }
-            } else {
-                DispatchQueue.main.async {
-                    placeholderContext.deletePlaceholder()
-                }
-            }
         }
     }
 }

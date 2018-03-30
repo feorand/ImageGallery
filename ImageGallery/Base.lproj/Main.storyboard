@@ -32,6 +32,9 @@
                                     <rect key="frame" x="0.0" y="0.0" width="230" height="190"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="TNs-uy-kNf">
+                                            <rect key="frame" x="105" y="85" width="20" height="20"/>
+                                        </activityIndicatorView>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jGO-hH-FKK">
                                             <rect key="frame" x="0.0" y="0.0" width="230" height="190"/>
                                         </imageView>
@@ -39,8 +42,10 @@
                                 </view>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="jGO-hH-FKK" secondAttribute="trailing" id="Vbw-WT-4WL"/>
+                                    <constraint firstItem="TNs-uy-kNf" firstAttribute="centerX" secondItem="uOM-Uc-51j" secondAttribute="centerX" id="X1V-HG-b73"/>
                                     <constraint firstAttribute="bottom" secondItem="jGO-hH-FKK" secondAttribute="bottom" id="bO9-bA-IZi"/>
                                     <constraint firstItem="jGO-hH-FKK" firstAttribute="leading" secondItem="uOM-Uc-51j" secondAttribute="leading" id="gI1-ap-L5j"/>
+                                    <constraint firstItem="TNs-uy-kNf" firstAttribute="centerY" secondItem="uOM-Uc-51j" secondAttribute="centerY" id="qBP-f9-dbg"/>
                                     <constraint firstItem="jGO-hH-FKK" firstAttribute="top" secondItem="uOM-Uc-51j" secondAttribute="top" id="wNv-ex-WL6"/>
                                 </constraints>
                                 <connections>
