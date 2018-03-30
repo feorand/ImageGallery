@@ -25,13 +25,13 @@ class GalleryViewController: UICollectionViewController
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return gallery.images.count
+        return gallery.imageDatas.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCell", for: indexPath)
         if let cell = cell as? ImageCollectionViewCell {
-            cell.imageView.image = gallery.images[indexPath.item]
+            //cell.imageView.image =
         }
         return cell
     }
@@ -44,7 +44,7 @@ class GalleryViewController: UICollectionViewController
 
 extension GalleryViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let height = Int(CGFloat(width) * gallery.aspectRatios[indexPath.item])
+        let height = Int(CGFloat(width) * gallery.imageDatas[indexPath.item].ratio)
         return CGSize(width: width, height:height)
     }
 }
@@ -91,20 +91,37 @@ extension GalleryViewController: UICollectionViewDropDelegate
                 let placeholder = UICollectionViewDropPlaceholder(insertionIndexPath: destinationIndexPath, reuseIdentifier: "PlaceholderCell")
                 let context = coordinator.drop(item.dragItem, to: placeholder)
                 
-                var aspectRatio: CGFloat = 1.0
+                var obtainedURL: URL?
+                var obtainedRatio: CGFloat?
                 
                 let _ = item.dragItem.itemProvider.loadObject(ofClass: UIImage.self) { imageObject, error in
                     if let image = imageObject as? UIImage {
-                        aspectRatio = image.size.height / image.size.width
+                        let ratio = image.size.height / image.size.width
+                        obtainedRatio = ratio
+                        if let url = obtainedURL {
+                            self.insertImageData(url: url, ratio: ratio, indexPath: destinationIndexPath)
+                        }
                     }
                 }
                 
                 let _ = item.dragItem.itemProvider.loadObject(ofClass: URL.self) { urlObject, error in
                     if let url = urlObject {
-                        self.getActualImageFor(placeholderContext: context, url: url, ratio: aspectRatio)
+                        //self.getActualImageFor(placeholderContext: context, url: url, ratio: aspectRatio)
+                        obtainedURL = url
+                        if let ratio = obtainedRatio {
+                            self.insertImageData(url: url, ratio: ratio, indexPath: destinationIndexPath)
+                        }
                     }
                 }
             }
+        }
+    }
+    
+    private func insertImageData(url: URL, ratio: CGFloat, indexPath: IndexPath) {
+        gallery.imageDatas.insert((url.imageURL, ratio), at: indexPath.item)
+        
+        DispatchQueue.main.async {
+            self.collectionView?.insertItems(at: [indexPath])
         }
     }
     

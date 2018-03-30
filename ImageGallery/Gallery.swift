@@ -8,7 +8,11 @@
 
 import UIKit
 
-class Gallery {
+class Gallery
+{
+    var name = "New Gallery"
+    var imageDatas: [(url: URL, ratio: CGFloat)] = []
+    
     private(set) var images: [UIImage] = []
     private(set) var aspectRatios: [CGFloat] = []
     
