@@ -8,20 +8,16 @@
 
 import UIKit
 
-struct ImageCollectionParameters {
-    static let InterImageSpace = 20
-}
-
 class GalleryViewController: UICollectionViewController
 {
     var gallery = Gallery()
-    var width = 200
+    var width = 230
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         collectionView?.dragDelegate = self
-        collectionView?.dropDelegate = self
+        collectionView?.dropDelegate = self        
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -35,20 +31,16 @@ class GalleryViewController: UICollectionViewController
         }
         return cell
     }
+    
+    @IBAction func pinchGestureRecognized(_ sender: UIPinchGestureRecognizer) {
+        
+    }
 }
 
 extension GalleryViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let height = Int(CGFloat(width) * gallery.aspectRatios[indexPath.item])
         return CGSize(width: width, height:height)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return CGFloat(ImageCollectionParameters.InterImageSpace)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return CGFloat(ImageCollectionParameters.InterImageSpace)
     }
 }
 
