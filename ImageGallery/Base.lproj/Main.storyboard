@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="JbU-K1-ZHp">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="2Xy-fu-GBM">
     <device id="ipad10_5" orientation="landscape">
         <adaptation id="splitview2_3"/>
     </device>
@@ -14,7 +14,7 @@
             <objects>
                 <collectionViewController id="JbU-K1-ZHp" customClass="GalleryViewController" customModule="ImageGallery" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="u8D-KP-0lL">
-                        <rect key="frame" x="0.0" y="0.0" width="782" height="834"/>
+                        <rect key="frame" x="0.0" y="0.0" width="461.5" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
@@ -26,7 +26,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImageCell" id="uOM-Uc-51j" customClass="ImageCollectionViewCell" customModule="ImageGallery" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="230" height="190"/>
+                                <rect key="frame" x="116" y="0.0" width="230" height="190"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                     <rect key="frame" x="0.0" y="0.0" width="230" height="190"/>
@@ -53,7 +53,7 @@
                                 </connections>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PlaceholderCell" id="DiO-E8-xtn">
-                                <rect key="frame" x="276" y="0.0" width="230" height="190"/>
+                                <rect key="frame" x="116" y="230" width="230" height="190"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                     <rect key="frame" x="0.0" y="0.0" width="230" height="190"/>
@@ -76,6 +76,7 @@
                             <outletCollection property="gestureRecognizers" destination="gde-HH-bcx" appends="YES" id="AAI-0B-Kaw"/>
                         </connections>
                     </collectionView>
+                    <navigationItem key="navigationItem" id="EKq-3i-Nb2"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6QH-6a-VeH" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <pinchGestureRecognizer id="gde-HH-bcx">
@@ -84,7 +85,83 @@
                     </connections>
                 </pinchGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1580" y="186"/>
+            <point key="canvasLocation" x="2900" y="242"/>
+        </scene>
+        <!--Galleries-->
+        <scene sceneID="hdk-0u-cjl">
+            <objects>
+                <tableViewController clearsSelectionOnViewWillAppear="NO" id="wTc-Ua-ZxO" customClass="GalleriesTableViewController" customModule="ImageGallery" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Ih1-2J-so2">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="834"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="GalleryCell" id="pGu-eY-hrf">
+                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pGu-eY-hrf" id="5em-1J-vok">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="wTc-Ua-ZxO" id="8aa-yV-hKS"/>
+                            <outlet property="delegate" destination="wTc-Ua-ZxO" id="lJo-bs-L1p"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Galleries" id="l9J-2o-uWe"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vbB-nm-OaV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2901" y="-409"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="4ZN-el-FqM">
+            <objects>
+                <navigationController id="4Wt-Ba-FHu" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="geF-WB-FgZ">
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="wTc-Ua-ZxO" kind="relationship" relationship="rootViewController" id="wRr-OT-N5s"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hzY-ns-V1S" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2131" y="-409"/>
+        </scene>
+        <!--Split View Controller-->
+        <scene sceneID="gjB-k4-9T8">
+            <objects>
+                <splitViewController id="2Xy-fu-GBM" sceneMemberID="viewController">
+                    <connections>
+                        <segue destination="4Wt-Ba-FHu" kind="relationship" relationship="masterViewController" id="irw-yG-W0b"/>
+                        <segue destination="thw-Iz-4tn" kind="relationship" relationship="detailViewController" id="hXb-jx-lgh"/>
+                    </connections>
+                </splitViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7il-o9-fFO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1363" y="-82"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="tmI-qZ-Pzi">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="thw-Iz-4tn" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3cu-fD-8Tq">
+                        <rect key="frame" x="0.0" y="20" width="461.5" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="JbU-K1-ZHp" kind="relationship" relationship="rootViewController" id="fAx-3p-9kF"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Y0M-g5-OYg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2131" y="242"/>
         </scene>
     </scenes>
 </document>

@@ -16,6 +16,8 @@
 		7ABEA0F3206CB0B9009BD95C /* Gallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABEA0F2206CB0B9009BD95C /* Gallery.swift */; };
 		7ABEA0F5206CB590009BD95C /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABEA0F4206CB590009BD95C /* ImageCollectionViewCell.swift */; };
 		7ABEA0F7206E1877009BD95C /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABEA0F6206E1877009BD95C /* Array+Extension.swift */; };
+		7ABEA0F9206E3E28009BD95C /* GalleriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABEA0F8206E3E28009BD95C /* GalleriesTableViewController.swift */; };
+		7ABEA0FB206E3EA2009BD95C /* GalleriesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABEA0FA206E3EA2009BD95C /* GalleriesList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		7ABEA0F2206CB0B9009BD95C /* Gallery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gallery.swift; sourceTree = "<group>"; };
 		7ABEA0F4206CB590009BD95C /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		7ABEA0F6206E1877009BD95C /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
+		7ABEA0F8206E3E28009BD95C /* GalleriesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleriesTableViewController.swift; sourceTree = "<group>"; };
+		7ABEA0FA206E3EA2009BD95C /* GalleriesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleriesList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,8 @@
 			isa = PBXGroup;
 			children = (
 				7ABEA0E1206CA194009BD95C /* Main.storyboard */,
+				7ABEA0F8206E3E28009BD95C /* GalleriesTableViewController.swift */,
+				7ABEA0FA206E3EA2009BD95C /* GalleriesList.swift */,
 				7ABEA0DF206CA194009BD95C /* GalleryViewController.swift */,
 				7ABEA0F4206CB590009BD95C /* ImageCollectionViewCell.swift */,
 				7ABEA0F2206CB0B9009BD95C /* Gallery.swift */,
@@ -158,8 +164,10 @@
 			files = (
 				7ABEA0F3206CB0B9009BD95C /* Gallery.swift in Sources */,
 				7ABEA0F5206CB590009BD95C /* ImageCollectionViewCell.swift in Sources */,
+				7ABEA0FB206E3EA2009BD95C /* GalleriesList.swift in Sources */,
 				7ABEA0F1206CA318009BD95C /* Utilities.swift in Sources */,
 				7ABEA0F7206E1877009BD95C /* Array+Extension.swift in Sources */,
+				7ABEA0F9206E3E28009BD95C /* GalleriesTableViewController.swift in Sources */,
 				7ABEA0E0206CA194009BD95C /* GalleryViewController.swift in Sources */,
 				7ABEA0DE206CA194009BD95C /* AppDelegate.swift in Sources */,
 			);

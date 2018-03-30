@@ -10,6 +10,10 @@ import UIKit
 
 class Gallery
 {
-    var name = "New Gallery"
+    var name: String
     var imageDatas: [(url: URL, ratio: CGFloat)] = []
+    
+    init(name: String = "New Gallery") {
+        self.name = name
+    }
 }
