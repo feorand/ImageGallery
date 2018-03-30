@@ -11,7 +11,7 @@ import UIKit
 class GalleriesTableViewController: UITableViewController
 {
     var galleries = GalleriesList().galleries
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return galleries.count
     }
@@ -26,8 +26,13 @@ class GalleriesTableViewController: UITableViewController
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        switch segue.identifier {
+        case .some("ShowGallery"):
+            if let controller = segue.destination as? GalleryViewController, let cell = sender as? UITableViewCell, let index = tableView.indexPath(for: cell) {
+                controller.gallery = galleries[index.row]
+            }
+        default:
+            print("Segue without identifier")
+        }
     }
-
 }
