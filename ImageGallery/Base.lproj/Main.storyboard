@@ -17,6 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="782" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="40" minimumInteritemSpacing="40" id="GkC-DT-zg8">
                             <size key="itemSize" width="230" height="190"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -67,6 +68,7 @@
                         <connections>
                             <outlet property="dataSource" destination="JbU-K1-ZHp" id="JIV-EG-ZVl"/>
                             <outlet property="delegate" destination="JbU-K1-ZHp" id="Vat-ru-OWK"/>
+                            <outletCollection property="gestureRecognizers" destination="gde-HH-bcx" appends="YES" id="AAI-0B-Kaw"/>
                         </connections>
                     </collectionView>
                 </collectionViewController>
@@ -76,7 +78,6 @@
                         <action selector="pinchGestureRecognized:" destination="JbU-K1-ZHp" id="MJH-Ka-7kY"/>
                     </connections>
                 </pinchGestureRecognizer>
-                <tapGestureRecognizer id="etl-P4-2j5"/>
             </objects>
             <point key="canvasLocation" x="1580" y="186"/>
         </scene>

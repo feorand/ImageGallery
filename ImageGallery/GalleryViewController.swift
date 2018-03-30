@@ -8,10 +8,14 @@
 
 import UIKit
 
+struct ImageGalleryParameters {
+    static let ImageWidth = 230
+}
+
 class GalleryViewController: UICollectionViewController
 {
     var gallery = Gallery()
-    var width = 230
+    var width = ImageGalleryParameters.ImageWidth
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +37,8 @@ class GalleryViewController: UICollectionViewController
     }
     
     @IBAction func pinchGestureRecognized(_ sender: UIPinchGestureRecognizer) {
-        
+        width = Int(CGFloat(ImageGalleryParameters.ImageWidth) * sender.scale)
+        collectionView?.reloadData()
     }
 }
 
