@@ -23,7 +23,7 @@ class GalleriesTableViewController: UITableViewController
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return deletedGalleries.count > 0 ? 2 : 1
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
