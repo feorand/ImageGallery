@@ -11,8 +11,14 @@ import UIKit
 class GalleriesTableViewController: UITableViewController
 {
     var galleryList:GalleryList?
-    private var galleries: [Gallery]? {
-        return galleryList?.galleries
+    private var galleries: [Gallery] {
+        return galleryList?.galleries ?? []
+    }
+    private var nondeletedGalleries: [Gallery] {
+        return galleries.filter{!$0.isDeleted}
+    }
+    private var deletedGalleries: [Gallery] {
+        return galleries.filter{$0.isDeleted}
     }
     
     override func viewDidLoad() {
@@ -27,28 +33,48 @@ class GalleriesTableViewController: UITableViewController
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 1 {
+        switch section {
+        case 1:
             return "Recently Deleted"
+        default:
+            return nil
         }
-        
-        return nil
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return galleries?.count ?? 0
+        switch section {
+        case 0:
+            return nondeletedGalleries.count
+        case 1:
+            return deletedGalleries.count
+        default:
+            return 0
+        }
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GalleryCell", for: indexPath)
-        if let gallery = galleries?[indexPath.row] {
+        var gallery: Gallery?
+        
+        switch indexPath.section {
+        case 0:
+            gallery = nondeletedGalleries[indexPath.row]
+        case 1:
+            gallery = deletedGalleries[indexPath.row]
+        default:
+            break
+        }
+        
+        if let gallery = gallery {
             cell.textLabel?.text = gallery.name
         }
+        
         return cell
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            
+
         }
     }
 
@@ -57,8 +83,8 @@ class GalleriesTableViewController: UITableViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case .some("ShowGallery"):
-            if let controller = segue.destination as? GalleryViewController, let cell = sender as? UITableViewCell, let index = tableView.indexPath(for: cell), let gallery = galleries?[index.row] {
-                controller.gallery = gallery
+            if let controller = segue.destination as? GalleryViewController, let cell = sender as? UITableViewCell, let index = tableView.indexPath(for: cell) {
+                controller.gallery = galleries[index.row]
             }
         default:
             print("Segue without identifier")
