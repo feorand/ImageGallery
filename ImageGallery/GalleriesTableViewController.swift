@@ -10,16 +10,27 @@ import UIKit
 
 class GalleriesTableViewController: UITableViewController
 {
-    var galleries = GalleriesList().galleries
+    var galleryList:GalleryList?
+    private var galleries: [Gallery]? {
+        return galleryList?.galleries
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let startIndexPath = IndexPath(row: 0, section: 0)
+        tableView.selectRow(at: startIndexPath, animated: false, scrollPosition: .none)
+    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return galleries.count
+        return galleries?.count ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GalleryCell", for: indexPath)
-        let gallery = galleries[indexPath.row]
-        cell.textLabel?.text = gallery.name
+        if let gallery = galleries?[indexPath.row] {
+            cell.textLabel?.text = gallery.name
+        }
         return cell
     }
 
@@ -28,8 +39,8 @@ class GalleriesTableViewController: UITableViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case .some("ShowGallery"):
-            if let controller = segue.destination as? GalleryViewController, let cell = sender as? UITableViewCell, let index = tableView.indexPath(for: cell) {
-                controller.gallery = galleries[index.row]
+            if let controller = segue.destination as? GalleryViewController, let cell = sender as? UITableViewCell, let index = tableView.indexPath(for: cell), let gallery = galleries?[index.row] {
+                controller.gallery = gallery
             }
         default:
             print("Segue without identifier")

@@ -15,7 +15,7 @@ struct ImageGalleryParameters {
 
 class GalleryViewController: UICollectionViewController
 {
-    var gallery = Gallery()
+    var gallery: Gallery?
     var width = ImageGalleryParameters.ImageWidth
     
     var flowLayout: UICollectionViewFlowLayout? {
@@ -30,7 +30,7 @@ class GalleryViewController: UICollectionViewController
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return gallery.imageDatas.count
+        return gallery?.imageDatas.count ?? 0
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -38,7 +38,7 @@ class GalleryViewController: UICollectionViewController
         if let cell = cell as? ImageCollectionViewCell {
             cell.imageView.image = nil
             DispatchQueue.global(qos: .userInitiated).async {
-                if let data = try? Data(contentsOf: self.gallery.imageDatas[indexPath.item].url), let image = UIImage(data: data) {
+                if let gallery = self.gallery, let data = try? Data(contentsOf: gallery.imageDatas[indexPath.item].url), let image = UIImage(data: data) {
                     DispatchQueue.main.async {
                         cell.imageView.image = image
                     }
@@ -60,8 +60,12 @@ class GalleryViewController: UICollectionViewController
 
 extension GalleryViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let height = Int(CGFloat(width) * gallery.imageDatas[indexPath.item].ratio)
-        return CGSize(width: width, height:height)
+        if let gallery = gallery {
+            let height = Int(CGFloat(width) * gallery.imageDatas[indexPath.item].ratio)
+            return CGSize(width: width, height:height)
+        } else {
+            return CGSize.zero
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
@@ -105,7 +109,7 @@ extension GalleryViewController: UICollectionViewDropDelegate
         for item in coordinator.items {
             if let sourcePath = item.sourceIndexPath {
                 collectionView.performBatchUpdates({
-                    gallery.imageDatas.move(from: sourcePath.item, to: destinationIndexPath.item)
+                    gallery?.imageDatas.move(from: sourcePath.item, to: destinationIndexPath.item)
                     collectionView.deleteItems(at: [sourcePath])
                     collectionView.insertItems(at: [destinationIndexPath])
                 })
@@ -136,7 +140,7 @@ extension GalleryViewController: UICollectionViewDropDelegate
     }
     
     private func insertImageData(url: URL, ratio: CGFloat, indexPath: IndexPath) {
-        gallery.imageDatas.insert((url.imageURL, ratio), at: indexPath.item)
+        gallery?.imageDatas.insert((url.imageURL, ratio), at: indexPath.item)
         
         DispatchQueue.main.async {
             self.collectionView?.insertItems(at: [indexPath])
