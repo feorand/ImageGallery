@@ -9,7 +9,8 @@
 import UIKit
 
 struct ImageGalleryParameters {
-    static let ImageWidth = 230
+    static let ImageWidth = 190
+    static let MinimumInterImageWidth: CGFloat = 15.0
 }
 
 class GalleryViewController: UICollectionViewController
@@ -61,6 +62,14 @@ extension GalleryViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let height = Int(CGFloat(width) * gallery.imageDatas[indexPath.item].ratio)
         return CGSize(width: width, height:height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return ImageGalleryParameters.MinimumInterImageWidth
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return ImageGalleryParameters.MinimumInterImageWidth
     }
 }
 
