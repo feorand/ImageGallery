@@ -9,7 +9,7 @@
 import UIKit
 
 struct ImageGalleryParameters {
-    static let ImageWidth = 190
+    static let ImageWidth: CGFloat = 190.0
     static let MinimumInterImageWidth: CGFloat = 15.0
 }
 
@@ -53,7 +53,8 @@ class GalleryViewController: UICollectionViewController
     }
     
     @IBAction func pinchGestureRecognized(_ sender: UIPinchGestureRecognizer) {
-        width = Int(CGFloat(ImageGalleryParameters.ImageWidth) * sender.scale)
+        width *= sender.scale
+        sender.scale = 1.0
         flowLayout?.invalidateLayout()
     }
 }
@@ -61,7 +62,7 @@ class GalleryViewController: UICollectionViewController
 extension GalleryViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if let gallery = gallery {
-            let height = Int(CGFloat(width) * gallery.imageDatas[indexPath.item].ratio)
+            let height = CGFloat(width) * gallery.imageDatas[indexPath.item].ratio
             return CGSize(width: width, height:height)
         } else {
             return CGSize.zero
