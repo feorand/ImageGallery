@@ -12,6 +12,7 @@ class Gallery
 {
     var name: String
     var imageDatas: [(url: URL, ratio: CGFloat)] = []
+    var isDeleted = false 
     
     init(name: String = "New Gallery") {
         self.name = name

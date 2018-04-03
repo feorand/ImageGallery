@@ -22,6 +22,18 @@ class GalleriesTableViewController: UITableViewController
         tableView.selectRow(at: startIndexPath, animated: false, scrollPosition: .none)
     }
     
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 1 {
+            return "Recently Deleted"
+        }
+        
+        return nil
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return galleries?.count ?? 0
     }
@@ -32,6 +44,12 @@ class GalleriesTableViewController: UITableViewController
             cell.textLabel?.text = gallery.name
         }
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            
+        }
     }
 
     // MARK: - Navigation
