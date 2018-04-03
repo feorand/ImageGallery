@@ -11,6 +11,9 @@ import UIKit
 class GalleriesTableViewController: UITableViewController
 {
     var galleryList:GalleryList?
+    private var galleries: [Gallery] { return galleryList?.galleries ?? [] }
+    private var nondeletedGalleries: [Gallery] { return galleries.filter{!$0.isDeleted} }
+    private var deletedGalleries: [Gallery] { return galleries.filter{$0.isDeleted} }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,9 +38,9 @@ class GalleriesTableViewController: UITableViewController
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return galleryList?.galleries.filter{!$0.isDeleted}.count ?? 0
+            return nondeletedGalleries.count
         case 1:
-            return galleryList?.galleries.filter{$0.isDeleted}.count ?? 0
+            return deletedGalleries.count
         default:
             return 0
         }
@@ -49,9 +52,9 @@ class GalleriesTableViewController: UITableViewController
         
         switch indexPath.section {
         case 0:
-            gallery = galleryList?.galleries.filter{!$0.isDeleted}[indexPath.row]
+            gallery = nondeletedGalleries[indexPath.row]
         case 1:
-            gallery = galleryList?.galleries.filter{$0.isDeleted}[indexPath.row]
+            gallery = deletedGalleries[indexPath.row]
         default:
             break
         }
@@ -65,7 +68,20 @@ class GalleriesTableViewController: UITableViewController
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            
+            switch indexPath.section {
+            case 0:
+                nondeletedGalleries[indexPath.row].isDeleted = true
+                tableView.reloadData()
+            case 1:
+                let id = deletedGalleries[indexPath.row].id
+                let index = galleryList?.galleries.index{$0.id == id}
+                if let index = index {
+                    galleryList?.galleries.remove(at: index)
+                    tableView.deleteRows(at: [indexPath], with: .automatic)
+                }
+            default:
+                break
+            }
         }
     }
 
@@ -75,7 +91,7 @@ class GalleriesTableViewController: UITableViewController
         switch segue.identifier {
         case .some("ShowGallery"):
             if let controller = segue.destination as? GalleryViewController, let cell = sender as? UITableViewCell, let index = tableView.indexPath(for: cell) {
-                controller.gallery = galleryList?.galleries[index.row]
+                controller.gallery = galleries[index.row]
             }
         default:
             print("Segue without identifier")
