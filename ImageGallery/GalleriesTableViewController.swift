@@ -15,6 +15,21 @@ class GalleriesTableViewController: UITableViewController
     private var nondeletedGalleries: [Gallery] { return galleries.filter{!$0.isDeleted} }
     private var deletedGalleries: [Gallery] { return galleries.filter{$0.isDeleted} }
     
+    private func gallery(for indexPath:IndexPath) -> Gallery? {
+        var gallery: Gallery?
+        
+        switch indexPath.section {
+        case 0:
+            gallery = nondeletedGalleries[indexPath.row]
+        case 1:
+            gallery = deletedGalleries[indexPath.row]
+        default:
+            break
+        }
+        
+        return gallery
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -48,21 +63,9 @@ class GalleriesTableViewController: UITableViewController
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GalleryCell", for: indexPath)
-        var gallery: Gallery?
-        
-        switch indexPath.section {
-        case 0:
-            gallery = nondeletedGalleries[indexPath.row]
-        case 1:
-            gallery = deletedGalleries[indexPath.row]
-        default:
-            break
-        }
-        
-        if let gallery = gallery {
+        if let gallery = gallery(for: indexPath) {
             cell.textLabel?.text = gallery.name
         }
-        
         return cell
     }
     
@@ -90,8 +93,10 @@ class GalleriesTableViewController: UITableViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case .some("ShowGallery"):
-            if let controller = segue.destination as? GalleryViewController, let cell = sender as? UITableViewCell, let index = tableView.indexPath(for: cell) {
-                controller.gallery = galleries[index.row]
+            if let controller = segue.destination as? GalleryViewController, let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
+                if let gallery = gallery(for: indexPath) {
+                    controller.gallery = gallery
+                }
             }
         default:
             print("Segue without identifier")
