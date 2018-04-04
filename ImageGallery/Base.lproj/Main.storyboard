@@ -49,6 +49,7 @@
                                 </constraints>
                                 <connections>
                                     <outlet property="imageView" destination="jGO-hH-FKK" id="5C8-ob-9f8"/>
+                                    <segue destination="NY4-dl-Sze" kind="show" id="hFc-xo-zcK"/>
                                 </connections>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PlaceholderCell" id="DiO-E8-xtn">
@@ -90,15 +91,16 @@
             <objects>
                 <viewController id="NY4-dl-Sze" customClass="ImageViewController" customModule="ImageGallery" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rfc-52-8wo">
-                        <rect key="frame" x="0.0" y="0.0" width="782" height="834"/>
+                        <rect key="frame" x="0.0" y="0.0" width="461.5" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="J8M-yX-5fX"/>
                     </view>
+                    <navigationItem key="navigationItem" id="2QA-Av-hDn"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EOZ-Ex-A4S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3615" y="242"/>
+            <point key="canvasLocation" x="4377.2378516624049" y="241.72661870503597"/>
         </scene>
         <!--Galleries-->
         <scene sceneID="hdk-0u-cjl">
