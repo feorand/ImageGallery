@@ -10,5 +10,5 @@ import UIKit
 
 class ImageViewController: UIViewController
 {
-
+    var image: UIImage?
 }

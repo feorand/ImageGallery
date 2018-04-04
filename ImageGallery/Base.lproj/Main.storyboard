@@ -32,10 +32,10 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="TNs-uy-kNf">
-                                            <rect key="frame" x="-10" y="85" width="20" height="20"/>
+                                            <rect key="frame" x="490" y="490" width="20" height="20"/>
                                         </activityIndicatorView>
                                         <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jGO-hH-FKK">
-                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="190"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                                         </imageView>
                                     </subviews>
                                 </view>
@@ -49,7 +49,7 @@
                                 </constraints>
                                 <connections>
                                     <outlet property="imageView" destination="jGO-hH-FKK" id="5C8-ob-9f8"/>
-                                    <segue destination="NY4-dl-Sze" kind="show" id="hFc-xo-zcK"/>
+                                    <segue destination="NY4-dl-Sze" kind="show" identifier="ShowImage" id="hFc-xo-zcK"/>
                                 </connections>
                             </collectionViewCell>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PlaceholderCell" id="DiO-E8-xtn">
@@ -59,7 +59,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="FVk-xO-Wc2">
-                                            <rect key="frame" x="-10" y="85" width="20" height="20"/>
+                                            <rect key="frame" x="-10" y="-10" width="20" height="20"/>
                                         </activityIndicatorView>
                                     </subviews>
                                 </view>
@@ -100,7 +100,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EOZ-Ex-A4S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4377.2378516624049" y="241.72661870503597"/>
+            <point key="canvasLocation" x="3750" y="242"/>
         </scene>
         <!--Galleries-->
         <scene sceneID="hdk-0u-cjl">

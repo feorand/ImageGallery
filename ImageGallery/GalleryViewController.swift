@@ -62,7 +62,15 @@ class GalleryViewController: UICollectionViewController
     //MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        view.endEditing(true)
+        switch segue.identifier {
+        case .some("ShowImage"):
+            if let controller = segue.destination as? ImageViewController, let sender = sender as? ImageCollectionViewCell {
+                view.endEditing(true)
+                controller.image = sender.imageView.image
+            }
+        default:
+            break
+        }
     }
 }
 
