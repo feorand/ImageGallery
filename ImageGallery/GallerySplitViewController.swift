@@ -16,7 +16,7 @@ class GallerySplitViewController: UISplitViewController
         super.viewDidLoad()
 
         preferredDisplayMode = .allVisible
-        preferredPrimaryColumnWidthFraction = 0.2
+        preferredPrimaryColumnWidthFraction = 0.3
         
         galleryList.galleries = [
             Gallery(name: "First Gallery"),

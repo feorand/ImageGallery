@@ -63,10 +63,14 @@ class GalleriesTableViewController: UITableViewController
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GalleryCell", for: indexPath)
-        if let gallery = gallery(for: indexPath) {
-            cell.textLabel?.text = gallery.name
+        if let cell = cell as? GalleriesTableViewCell, let gallery = gallery(for: indexPath) {
+            cell.titleLabel?.text = gallery.name
         }
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 40.0
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
