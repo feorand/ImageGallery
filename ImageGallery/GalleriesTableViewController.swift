@@ -150,6 +150,7 @@ class GalleriesTableViewController: UITableViewController
         case .some("ShowGallery"):
             if let navController = segue.destination as? UINavigationController, let controller = navController.viewControllers[0] as? GalleryViewController, let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
                 if let gallery = gallery(for: indexPath) {
+                    view.endEditing(true)
                     controller.gallery = gallery
                 }
             }

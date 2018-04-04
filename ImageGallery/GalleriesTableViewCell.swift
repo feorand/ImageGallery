@@ -28,10 +28,14 @@ class GalleriesTableViewCell: UITableViewCell
 
 extension GalleriesTableViewCell: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.endEditing(false)
+        return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
         titleLabel.text = textField.text
         titleLabel.isHidden = false
         textField.isHidden = true
         textField.resignFirstResponder()
-        return true
     }
 }

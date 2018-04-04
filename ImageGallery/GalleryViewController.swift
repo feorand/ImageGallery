@@ -58,6 +58,12 @@ class GalleryViewController: UICollectionViewController
         sender.scale = 1.0
         flowLayout?.invalidateLayout()
     }
+    
+    //MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        view.endEditing(true)
+    }
 }
 
 extension GalleryViewController: UICollectionViewDelegateFlowLayout {
