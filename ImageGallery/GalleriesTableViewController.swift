@@ -109,6 +109,26 @@ class GalleriesTableViewController: UITableViewController
 
     // MARK: - Navigation
     
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        switch identifier {
+        case "ShowGallery":
+            if let sender = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: sender) {
+                switch indexPath.section {
+                case 0:
+                    return true
+                case 1:
+                    return false
+                default:
+                    break
+                }
+            }
+        default:
+            break
+        }
+        
+        return true
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case .some("ShowGallery"):
