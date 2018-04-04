@@ -25,6 +25,7 @@ class GalleryViewController: UICollectionViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.title = gallery?.name
         collectionView?.dragDelegate = self
         collectionView?.dropDelegate = self        
     }

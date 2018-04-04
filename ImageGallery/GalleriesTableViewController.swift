@@ -123,7 +123,7 @@ class GalleriesTableViewController: UITableViewController
                 }
             }
         default:
-            break
+            print("Segue without identifier")
         }
         
         return true
@@ -132,7 +132,7 @@ class GalleriesTableViewController: UITableViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case .some("ShowGallery"):
-            if let controller = segue.destination as? GalleryViewController, let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
+            if let navController = segue.destination as? UINavigationController, let controller = navController.viewControllers[0] as? GalleryViewController, let cell = sender as? UITableViewCell, let indexPath = tableView.indexPath(for: cell) {
                 if let gallery = gallery(for: indexPath) {
                     controller.gallery = gallery
                 }
