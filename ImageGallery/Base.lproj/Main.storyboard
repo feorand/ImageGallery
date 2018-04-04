@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -84,6 +85,21 @@
             </objects>
             <point key="canvasLocation" x="2900" y="242"/>
         </scene>
+        <!--Image View Controller-->
+        <scene sceneID="DXb-Jg-0Od">
+            <objects>
+                <viewController id="NY4-dl-Sze" customClass="ImageViewController" customModule="ImageGallery" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rfc-52-8wo">
+                        <rect key="frame" x="0.0" y="0.0" width="782" height="834"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="J8M-yX-5fX"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EOZ-Ex-A4S" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3615" y="242"/>
+        </scene>
         <!--Galleries-->
         <scene sceneID="hdk-0u-cjl">
             <objects>
@@ -107,7 +123,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IW8-q5-ZqR">
-                                            <rect key="frame" x="20" y="0.0" width="280" height="43.5"/>
+                                            <rect key="frame" x="20" y="7" width="280" height="30"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <textInputTraits key="textInputTraits" textContentType="name"/>
@@ -120,9 +136,8 @@
                                         <constraint firstItem="Kc1-sz-geE" firstAttribute="top" secondItem="5em-1J-vok" secondAttribute="top" id="NHB-0i-bss"/>
                                         <constraint firstAttribute="trailing" secondItem="Kc1-sz-geE" secondAttribute="trailing" constant="20" symbolic="YES" id="TzF-XK-ZhS"/>
                                         <constraint firstAttribute="bottom" secondItem="Kc1-sz-geE" secondAttribute="bottom" id="ZgO-MT-hJl"/>
+                                        <constraint firstItem="IW8-q5-ZqR" firstAttribute="centerY" secondItem="5em-1J-vok" secondAttribute="centerY" id="dG2-6h-9yn"/>
                                         <constraint firstItem="Kc1-sz-geE" firstAttribute="leading" secondItem="5em-1J-vok" secondAttribute="leading" constant="20" symbolic="YES" id="eSZ-HJ-37h"/>
-                                        <constraint firstAttribute="bottom" secondItem="IW8-q5-ZqR" secondAttribute="bottom" id="mjo-Ml-oT7"/>
-                                        <constraint firstItem="IW8-q5-ZqR" firstAttribute="top" secondItem="5em-1J-vok" secondAttribute="top" id="zJM-yW-rOL"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <gestureRecognizers/>
