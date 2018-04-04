@@ -87,6 +87,25 @@ class GalleriesTableViewController: UITableViewController
             }
         }
     }
+    
+    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        switch indexPath.section {
+        case 0:
+            break
+        case 1:
+            let undeleteAction = UIContextualAction(style: .normal, title: "Undelete") { [weak self](contextAction: UIContextualAction, sourceView: UIView, completionHandler: (Bool) -> Void) in
+                self?.deletedGalleries[indexPath.row].isDeleted = false
+                self?.tableView.reloadData()
+                completionHandler(true)
+            }
+            undeleteAction.backgroundColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
+            return UISwipeActionsConfiguration(actions: [undeleteAction])
+        default:
+            break
+        }
+        
+        return nil
+    }
 
     // MARK: - Navigation
     
