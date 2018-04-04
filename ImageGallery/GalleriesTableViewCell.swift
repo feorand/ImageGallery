@@ -15,8 +15,23 @@ class GalleriesTableViewCell: UITableViewCell
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
+    
+    func doubleTapGestureRecognized() {
+        titleTextField.delegate = self
+        titleTextField.text = titleLabel.text
+        titleTextField.isHidden = false
+        titleLabel.isHidden = true
+        titleTextField.becomeFirstResponder()
+    }
+}
 
+extension GalleriesTableViewCell: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        titleLabel.text = textField.text
+        titleLabel.isHidden = false
+        textField.isHidden = true
+        textField.resignFirstResponder()
+        return true
+    }
 }

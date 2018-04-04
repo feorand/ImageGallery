@@ -109,10 +109,11 @@
                                         <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IW8-q5-ZqR">
                                             <rect key="frame" x="20" y="0.0" width="280" height="43.5"/>
                                             <nil key="textColor"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <textInputTraits key="textInputTraits" textContentType="name"/>
                                         </textField>
                                     </subviews>
+                                    <gestureRecognizers/>
                                     <constraints>
                                         <constraint firstItem="IW8-q5-ZqR" firstAttribute="leading" secondItem="5em-1J-vok" secondAttribute="leading" constant="20" symbolic="YES" id="8mb-YK-V0a"/>
                                         <constraint firstAttribute="trailing" secondItem="IW8-q5-ZqR" secondAttribute="trailing" constant="20" symbolic="YES" id="B1c-NA-ubd"/>
@@ -124,6 +125,7 @@
                                         <constraint firstItem="IW8-q5-ZqR" firstAttribute="top" secondItem="5em-1J-vok" secondAttribute="top" id="zJM-yW-rOL"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <gestureRecognizers/>
                                 <connections>
                                     <outlet property="titleLabel" destination="Kc1-sz-geE" id="IOq-ym-Ea8"/>
                                     <outlet property="titleTextField" destination="IW8-q5-ZqR" id="YNI-fT-Txg"/>

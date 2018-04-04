@@ -64,6 +64,9 @@ class GalleriesTableViewController: UITableViewController
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "GalleryCell", for: indexPath)
         if let cell = cell as? GalleriesTableViewCell, let gallery = gallery(for: indexPath) {
+            let doubleTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(doubleTapGestureRecognized(_:)))
+            doubleTapRecognizer.numberOfTapsRequired = 2
+            cell.addGestureRecognizer(doubleTapRecognizer)
             cell.titleLabel?.text = gallery.name
         }
         return cell
@@ -110,6 +113,15 @@ class GalleriesTableViewController: UITableViewController
         
         return nil
     }
+    
+    // MARK: - Gestures
+    
+    @objc func doubleTapGestureRecognized(_ recognizer: UITapGestureRecognizer) {
+        if let cell = recognizer.view as? GalleriesTableViewCell {
+            cell.doubleTapGestureRecognized()
+        }
+    }
+
 
     // MARK: - Navigation
     
