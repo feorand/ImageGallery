@@ -10,5 +10,43 @@ import UIKit
 
 class ImageViewController: UIViewController
 {
-    var image: UIImage?
+    @IBOutlet weak var scrollView: UIScrollView! {
+        didSet {
+            scrollView.delegate = self
+            scrollView.addSubview(imageView)
+            scrollView.minimumZoomScale = 0.5
+            scrollView.maximumZoomScale = 4
+        }
+    }
+    
+    var imageURL: URL? {
+        didSet {
+            DispatchQueue.global(qos: .userInitiated).async {
+                if let url = self.imageURL, let data = try? Data(contentsOf: url), let image = UIImage(data: data) {
+                    self.image = image
+                }
+            }
+        }
+    }
+    
+    var imageView = GalleryImageView()
+    
+    var image: UIImage? {
+        didSet {
+            if let image = image {
+                DispatchQueue.main.async {
+                    self.imageView.image = image
+                    self.imageView.frame = CGRect(origin: CGPoint.zero, size: image.size)
+                    self.scrollView.contentSize = image.size
+                    //self.scrollView.zoomScale = max(self.view.bounds.size.width / image.size.width, self.view.bounds.height / image.size.height)
+                }
+            }
+        }
+    }
+}
+
+extension ImageViewController: UIScrollViewDelegate {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return imageView
+    }
 }

@@ -64,9 +64,11 @@ class GalleryViewController: UICollectionViewController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case .some("ShowImage"):
-            if let controller = segue.destination as? ImageViewController, let sender = sender as? ImageCollectionViewCell {
+            if let controller = segue.destination as? ImageViewController, let sender = sender as? ImageCollectionViewCell, let indexPath = collectionView?.indexPath(for: sender) {
+                let url = gallery?.imageDatas[indexPath.item].url
+                controller.imageURL = url
                 view.endEditing(true)
-                controller.image = sender.imageView.image
+                
             }
         default:
             break

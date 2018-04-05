@@ -10,8 +10,7 @@ import Foundation
 
 extension Array {
     mutating func move(from sourceIndex: Int, to destinationIndex: Int) {
-        let element = self[sourceIndex]
-        self.remove(at: sourceIndex)
+        let element = self.remove(at: sourceIndex)
         self.insert(element, at: destinationIndex)
     }
 }
