@@ -14,7 +14,7 @@ class ImageViewController: UIViewController
         didSet {
             scrollView.delegate = self
             scrollView.addSubview(imageView)
-            scrollView.minimumZoomScale = 0.5
+            scrollView.minimumZoomScale = 0.01
             scrollView.maximumZoomScale = 4
         }
     }
@@ -36,9 +36,8 @@ class ImageViewController: UIViewController
             if let image = image {
                 DispatchQueue.main.async {
                     self.imageView.image = image
-                    self.imageView.frame = CGRect(origin: CGPoint.zero, size: image.size)
                     self.scrollView.contentSize = image.size
-                    //self.scrollView.zoomScale = max(self.view.bounds.size.width / image.size.width, self.view.bounds.height / image.size.height)
+                    self.scrollView.zoomScale = min(self.view.bounds.size.width / image.size.width, self.view.bounds.height / image.size.height)
                 }
             }
         }

@@ -10,7 +10,12 @@ import UIKit
 
 class GalleryImageView: UIView
 {
-    var image: UIImage? { didSet {setNeedsDisplay()}}
+    var image: UIImage? {
+        didSet {
+            frame = CGRect(origin: CGPoint.zero, size: image?.size ?? CGSize.zero)
+            setNeedsDisplay()
+        }
+    }
     
     override func draw(_ rect: CGRect) {
         if let image = image {
