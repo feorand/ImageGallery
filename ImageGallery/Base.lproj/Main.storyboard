@@ -114,6 +114,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="2QA-Av-hDn"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="4bb-h2-tUZ" id="cOg-AJ-Jdy"/>
                         <outlet property="scrollView" destination="ADh-C1-Eoc" id="otx-uj-OQC"/>
                     </connections>
                 </viewController>

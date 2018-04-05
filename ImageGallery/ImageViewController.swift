@@ -10,6 +10,8 @@ import UIKit
 
 class ImageViewController: UIViewController
 {
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     @IBOutlet weak var scrollView: UIScrollView! {
         didSet {
             scrollView.delegate = self
@@ -35,6 +37,7 @@ class ImageViewController: UIViewController
         didSet {
             if let image = image {
                 DispatchQueue.main.async {
+                    self.activityIndicator.isHidden = true
                     self.imageView.image = image
                     self.scrollView.contentSize = image.size
                     self.scrollView.zoomScale = min(self.view.bounds.size.width / image.size.width, self.view.bounds.height / image.size.height)
