@@ -21,6 +21,10 @@ class ImageViewController: UIViewController
         }
     }
     
+    @IBOutlet weak var scrollViewWidthConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var scrollViewHeightConstraint: NSLayoutConstraint!
+    
     var imageURL: URL? {
         didSet {
             DispatchQueue.global(qos: .userInitiated).async {
@@ -50,5 +54,10 @@ class ImageViewController: UIViewController
 extension ImageViewController: UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return imageView
+    }
+    
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        scrollViewWidthConstraint.constant = scrollView.contentSize.width
+        scrollViewHeightConstraint.constant = scrollView.contentSize.height
     }
 }
